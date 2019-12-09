@@ -31,7 +31,7 @@ def number_of_rounds():
     while True:
         rounds=input("How many rounds would you like to play? (1 - 5): ")
 
-        if rounds== "0" or rounds=="2" or rounds =="3" or rounds== "4" or rounds== "5":
+        if rounds== "1" or rounds=="2" or rounds =="3" or rounds== "4" or rounds== "5":
             print(" ")
             return int(rounds)
         else:
@@ -48,69 +48,71 @@ def read_file():
     lista_question_answer = []
     for item in lista[:]:
         lista_question_answer.append(item.split(','))
-    answer_dict = {}
+    current_game_answers = {}
     for i in range (0, len(lista_question_answer)):
-        answer_dict[lista_question_answer[i][0]]= lista_question_answer[i][1]
-    return answer_dict
+        current_game_answers[lista_question_answer[i][0]]= lista_question_answer[i][1]
+    return current_game_answers
     
     
     
 
-def create_table():
-
+def create_table() -> list:
+    ''' create_table prints an empty table of 10 answers and returns it'''
     row=["----------", "---"].copy()
-    table =[]
+    answers_table =[]
     for i in range(10):
-        table.append(row.copy())
-    for index, row in enumerate(table):
+        answers_table.append(row.copy())
+    for index, row in enumerate(answers_table):
         print(index+1, "  ".join(row))    
-    return table
+    return answers_table
 
-table = create_table()
 
-def game(answer_dict):
+def game(current_game_answers) -> list:
 
-    print ("Which food is most popular!")
+    print ("Which food is most popular?")
     answer=input("Your answer is: " )
-    if answer in answer_dict.keys():
-        print(answer, answer_dict[answer])
-        table_position=[answer, answer_dict[answer]]
+    if answer in current_game_answers.keys():
+        print(current_player_answer, current_game_answers[current_player_answer])
+        list_answer_score =[current_player_answer, current_game_answers[current_player_answer]]
         
     else:
-        table_position=["Wrong aswer", 0]
+        list_answer_score=["Wrong aswer", 0]
 
-    return table_position
+    return list_answer_score
     
 
-table_position = game(read_file())
-def change_table(table, table_position):
+
+def change_table(game_table, answer_score):
     
-    which_element=10-int(table_position[1])
+    which_element=10-int(answer_score[1])
     if which_element in range(0, 10):
-        table[which_element]=table_position
+        game_table[which_element]=answer_score
         print()
-        for index, row in enumerate(table):
+        for index, row in enumerate(game_table):
             print(index+1, "  ".join(row))
     else:
         print("wrong answer")        
-    return table
+    return game_table
 
-change_table(table, table_position)
-
-def mix_players(nickname):
-    temp_players=list(nickname)
+def mix_players(players_list):
+    temp_players=list(players_list)
     random.shuffle(temp_players)
     print("List of players: ",  temp_players)
     return temp_players
 
 temp_players = mix_players(nickname)
 
-#print(round(nickname))
-
-#not ready yet
 def round(temp_players):
 
     for i in range(len(temp_players)):
         print("odpowiada ", temp_players[i])
         game()
+
+
+
+how_many_players = number_of_players()
+list_of_playing_people = nick(how_many_players)
+current_game_table = create_table()
+change_table(current_game_table, table_position)
+table_position = game(read_file())
 
