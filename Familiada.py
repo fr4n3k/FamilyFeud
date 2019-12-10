@@ -1,37 +1,34 @@
 import random
 
-def number_of_players():
-
-    while True:
-        no_of_players=input("What's the number of players? (2 - 4): ")
-
-        if no_of_players in ("2", "3", "4"):
+def number_of_players():#zwraca nam TYLKO 1 liczbe<!!!!!
+    verify=True
+    while verify:
+        no_of_players=int(input("What's the number of players? (2 - 4): "))
+        if no_of_players in range(1,5):
             print(" ")
-            return int(no_of_players)
+            verify=False
         else:
             continue
+    return no_of_players
 
-def nick(no_of_players):
+def nick(players):#zwraca nam graczy
     nickname=[]
-    for i in range(no_of_players):
+    for i in range(players):
         name=input("Enter a nickname: ")
         nickname.append(name)
-        
     return nickname
-
-nickname=nick(number_of_players())
 
 def print_players(list_of_players):
     
     for index, nick in enumerate(list_of_players):
         print("Player no", index + 1, "is: ", nick)
 
+
 def number_of_rounds():
 
     while True:
         rounds=input("How many rounds would you like to play? (1 - 5): ")
-
-        if rounds== "1" or rounds=="2" or rounds =="3" or rounds== "4" or rounds== "5":
+        if rounds in range(rounds):
             print(" ")
             return int(rounds)
         else:
@@ -51,10 +48,7 @@ def read_file():
     current_game_answers = {}
     for i in range (0, len(lista_question_answer)):
         current_game_answers[lista_question_answer[i][0]]= lista_question_answer[i][1]
-    return current_game_answers
-    
-    
-    
+    return current_game_answers  
 
 def create_table() -> list:
     ''' create_table prints an empty table of 10 answers and returns it'''
