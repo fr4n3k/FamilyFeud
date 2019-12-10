@@ -105,14 +105,19 @@ temp_players = mix_players(nickname)
 def round(temp_players):
 
     for i in range(len(temp_players)):
-        print("odpowiada ", temp_players[i])
+        print(temp_players[i], 'is answering:')
         game()
 
 
 
 how_many_players = number_of_players()
 list_of_playing_people = nick(how_many_players)
+print_players(list_of_playing_people)
+
+
+
 current_game_table = create_table()
 change_table(current_game_table, table_position)
 table_position = game(read_file())
 
+for k,v in inv.items():
