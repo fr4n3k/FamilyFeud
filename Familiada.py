@@ -5,7 +5,7 @@ def number_of_players():
     while True:
         no_of_players=input("What's the number of players? (2 - 4): ")
 
-        if no_of_players=="2" or no_of_players =="3" or no_of_players== "4":
+        if no_of_players in ("2", "3", "4"):
             print(" ")
             return int(no_of_players)
         else:
@@ -119,5 +119,3 @@ print_players(list_of_playing_people)
 current_game_table = create_table()
 change_table(current_game_table, table_position)
 table_position = game(read_file())
-
-for k,v in inv.items():
