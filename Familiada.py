@@ -1,6 +1,6 @@
 import random
-from os import listdir
-from os.path import isfile, join
+from os import listdir, getcwd
+from os.path import isfile, join, dirname, abspath
 
 
 def number_of_players():#zwraca nam TYLKO 1 liczbe<!!!!!
@@ -39,8 +39,9 @@ def number_of_rounds():
 
 def read_file():
     
-    categories = [file for file in listdir('home/mentor/Documents/1.familiadaGame/FamilyFeud/Categories/')#'/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/') 
-                if isfile(join('home/mentor/Documents/1.familiadaGame/FamilyFeud/Categories/', file))]#'/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/', file))]
+    file_directory = dirname(abspath(__file__))
+    categories = [file for file in listdir(file_directory+'/Categories/') 
+                if isfile(join(file_directory+'/Categories/', file))]
     lista =[]
     current_categorie = random.choice(categories)
     text = open(join('Categories/', current_categorie)).read()
@@ -109,8 +110,6 @@ def round(temp_players):
     # this function returns category question and table of answers
     category_answers = read_file()
     
-
-    game()
     for i in range(len(temp_players)):
         print(temp_players[i], 'is answering:')
         game()
