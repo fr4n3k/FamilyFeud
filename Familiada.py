@@ -60,6 +60,7 @@ def read_file():
 
 def create_table() -> list:
     ''' create_table prints an empty table of 10 answers and returns it'''
+
     row=["----------", "---"].copy()
     answers_table =[]
     for i in range(10):
@@ -69,13 +70,13 @@ def create_table() -> list:
     return answers_table
 
 
-def game(categorie_and_answers) -> list:
+def game(category_and_answers) -> list:
 
-    print (categorie_and_answers[0])
+    print (category_and_answers[0])
     answer=input("Your answer is: " )
-    if answer in categorie_and_answers[1].keys():
-        print(categorie_and_answers[1], categorie_and_answers[1][answer])
-        list_answer_score =[categorie_and_answers[1], categorie_and_answers[1][answer]]
+    if answer in category_and_answers[1].keys():
+        print(category_and_answers[1], category_and_answers[1][answer])
+        list_answer_score =[category_and_answers[1], category_and_answers[1][answer]]
         
     else:
         list_answer_score=["Wrong aswer", 0]
@@ -105,6 +106,11 @@ def mix_players(players_list):
 
 def round(temp_players):
 
+    # this function returns category question and table of answers
+    category_answers = read_file()
+    
+
+    game()
     for i in range(len(temp_players)):
         print(temp_players[i], 'is answering:')
         game()
