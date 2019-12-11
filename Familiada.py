@@ -19,7 +19,7 @@ def nick(players):#zwraca nam graczy
     for i in range(players):
         name=input("Enter a nickname: ")
         nickname.append(name)
-    return nicknamecwd
+    return nickname
 
 def print_players(list_of_players):
     
@@ -40,8 +40,8 @@ def number_of_rounds():
 def read_file():
     
     file_directory = dirname(abspath(__file__))
-    categories = [file for file in listdir(cwd+'/Categories/') 
-                if isfile(join(cwd+'/Categories/', file))]
+    categories = [file for file in listdir(file_directory+'/Categories/') 
+                if isfile(join(file_directory+'/Categories/', file))]
     lista =[]
     current_categorie = random.choice(categories)
     text = open(join('Categories/', current_categorie)).read()
@@ -110,8 +110,6 @@ def round(temp_players):
     # this function returns category question and table of answers
     category_answers = read_file()
     
-
-    game()
     for i in range(len(temp_players)):
         print(temp_players[i], 'is answering:')
         game()
