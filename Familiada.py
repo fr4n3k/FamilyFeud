@@ -30,10 +30,10 @@ def print_players(list_of_players):
 def number_of_rounds():
 
     while True:
-        rounds=input("How many rounds would you like to play? (1 - 5): ")
-        if rounds in range(rounds):
+        rounds=int(input("How many rounds would you like to play? (1 - 5): "))
+        if rounds in range(1, 6):
             print(" ")
-            return int(rounds)
+            return rounds
         else:
             continue
 
@@ -44,7 +44,7 @@ def read_file():
                 if isfile(join(file_directory+'/Categories/', file))]
     lista =[]
     current_categorie = random.choice(categories)
-    text = open(join('Categories/', current_categorie)).read()
+    text = open(join(file_directory+'Categories/', current_categorie)).read()
     lines = text.split('\n')
     for line in lines:
         lista.append(line)
@@ -71,7 +71,7 @@ def create_table() -> list:
     return answers_table
 
 
-def game(category_and_answers) -> list:
+def game_question(category_and_answers) -> list:
 
     print (category_and_answers[0])
     answer=input("Your answer is: " )
@@ -80,7 +80,7 @@ def game(category_and_answers) -> list:
         list_answer_score =[category_and_answers[1], category_and_answers[1][answer]]
         
     else:
-        list_answer_score=["Wrong aswer", 0]
+        list_answer_score=["Wrong answer", 0]
 
     return list_answer_score
     
@@ -112,7 +112,7 @@ def round(temp_players):
     
     for i in range(len(temp_players)):
         print(temp_players[i], 'is answering:')
-        game()
+        game_question()
 
 
 
@@ -120,7 +120,6 @@ how_many_players = number_of_players()
 list_of_playing_people = nick(how_many_players)
 print_players(list_of_playing_people)
 game(read_file())
-
 
 
 current_game_table = create_table()
