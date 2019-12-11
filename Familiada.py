@@ -1,6 +1,6 @@
 import random
-from os import listdir
-from os.path import isfile, join
+from os import listdir, getcwd
+from os.path import isfile, join, dirname, abspath
 
 
 def number_of_players():#zwraca nam TYLKO 1 liczbe<!!!!!
@@ -19,7 +19,7 @@ def nick(players):#zwraca nam graczy
     for i in range(players):
         name=input("Enter a nickname: ")
         nickname.append(name)
-    return nickname
+    return nicknamecwd
 
 def print_players(list_of_players):
     
@@ -39,8 +39,9 @@ def number_of_rounds():
 
 def read_file():
     
-    categories = [file for file in listdir('/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/') 
-                if isfile(join('/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/', file))]
+    file_directory = dirname(abspath(__file__))
+    categories = [file for file in listdir(cwd+'/Categories/') 
+                if isfile(join(cwd+'/Categories/', file))]
     lista =[]
     current_categorie = random.choice(categories)
     text = open(join('Categories/', current_categorie)).read()
