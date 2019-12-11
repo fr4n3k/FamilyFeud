@@ -1,4 +1,7 @@
 import random
+from os import listdir, getcwd
+from os.path import isfile, join, dirname, abspath
+
 
 def number_of_players():#zwraca nam TYLKO 1 liczbe<!!!!!
     verify=True
@@ -35,8 +38,18 @@ def number_of_rounds():
             continue
 
 def read_file():
+    
+<<<<<<< HEAD
+    categories = [file for file in listdir('home/mentor/Documents/1.familiadaGame/FamilyFeud/Categories/')#'/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/') 
+                if isfile(join('home/mentor/Documents/1.familiadaGame/FamilyFeud/Categories/', file))]#'/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/', file))]
+=======
+    file_directory = dirname(abspath(__file__))
+    categories = [file for file in listdir(file_directory+'/Categories/') 
+                if isfile(join(file_directory+'/Categories/', file))]
+>>>>>>> b76da9bb7be5eb4dbd7dece72ec47e7d841c4399
     lista =[]
-    text = open("/home/franekj/Documents/PythonWorkshop/TopTenFoods.txt").read()
+    current_categorie = random.choice(categories)
+    text = open(join('Categories/', current_categorie)).read()
     lines = text.split('\n')
     for line in lines:
         lista.append(line)
@@ -48,10 +61,12 @@ def read_file():
     current_game_answers = {}
     for i in range (0, len(lista_question_answer)):
         current_game_answers[lista_question_answer[i][0]]= lista_question_answer[i][1]
-    return current_game_answers  
+    categorie_name = current_categorie.rstrip('.txt')
+    return [categorie_name, current_game_answers]
 
 def create_table() -> list:
     ''' create_table prints an empty table of 10 answers and returns it'''
+
     row=["----------", "---"].copy()
     answers_table =[]
     for i in range(10):
@@ -61,13 +76,13 @@ def create_table() -> list:
     return answers_table
 
 
-def game(current_game_answers) -> list:
+def game(category_and_answers) -> list:
 
-    print ("Which food is most popular?")
+    print (category_and_answers[0])
     answer=input("Your answer is: " )
-    if answer in current_game_answers.keys():
-        print(current_player_answer, current_game_answers[current_player_answer])
-        list_answer_score =[current_player_answer, current_game_answers[current_player_answer]]
+    if answer in category_and_answers[1].keys():
+        print(category_and_answers[1], category_and_answers[1][answer])
+        list_answer_score =[category_and_answers[1], category_and_answers[1][answer]]
         
     else:
         list_answer_score=["Wrong aswer", 0]
@@ -94,10 +109,12 @@ def mix_players(players_list):
     print("List of players: ",  temp_players)
     return temp_players
 
-temp_players = mix_players(nickname)
 
 def round(temp_players):
 
+    # this function returns category question and table of answers
+    category_answers = read_file()
+    
     for i in range(len(temp_players)):
         print(temp_players[i], 'is answering:')
         game()
@@ -107,6 +124,7 @@ def round(temp_players):
 how_many_players = number_of_players()
 list_of_playing_people = nick(how_many_players)
 print_players(list_of_playing_people)
+game(read_file())
 
 
 
