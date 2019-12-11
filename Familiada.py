@@ -39,8 +39,8 @@ def number_of_rounds():
 
 def read_file():
     
-    categories = [file for file in listdir('/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/') 
-                if isfile(join('/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/', file))]
+    categories = [file for file in listdir('home/mentor/Documents/1.familiadaGame/FamilyFeud/Categories/')#'/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/') 
+                if isfile(join('home/mentor/Documents/1.familiadaGame/FamilyFeud/Categories/', file))]#'/home/franekj/Documents/PythonWorkshop/FamilyFeud/Categories/', file))]
     lista =[]
     current_categorie = random.choice(categories)
     text = open(join('Categories/', current_categorie)).read()
