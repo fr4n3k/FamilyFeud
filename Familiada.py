@@ -24,14 +24,14 @@ def nick(players):#zwraca nam graczy
 def print_players(list_of_players):
     
     for index, nick in enumerate(list_of_players):
-        print("Player no", index + 1, "is: ", nick)
+        print("Player no", index + 1, "is: ", nick)#
 
 
 def number_of_rounds():
 
     while True:
         rounds=int(input("How many rounds would you like to play? (1 - 5): "))
-        if rounds in range(1, 6):
+        if rounds in range(1,6):
             print(" ")
             return rounds
         else:
@@ -44,7 +44,7 @@ def read_file():
                 if isfile(join(file_directory+'/Categories/', file))]
     lista =[]
     current_categorie = random.choice(categories)
-    text = open(join(file_directory+'Categories/', current_categorie)).read()
+    text = open(join(file_directory+'/Categories/', current_categorie)).read()
     lines = text.split('\n')
     for line in lines:
         lista.append(line)
@@ -104,24 +104,35 @@ def mix_players(players_list):
     print("List of players: ",  temp_players)
     return temp_players
 
-
-def round(temp_players):
+def game():
 
     # this function returns category question and table of answers
-    category_answers = read_file()
     
-    for i in range(len(temp_players)):
-        print(temp_players[i], 'is answering:')
-        game_question()
+    
+    
+    rounds= number_of_rounds()
+    
+    how_many_players = number_of_players()
+    list_of_playing_people = nick(how_many_players)
+    print_players(list_of_playing_people)
+    for round in range (rounds):
+        print('round',rounds )
+        category_answers = read_file()
+        players_list=mix_players(list_of_playing_people)
+
+        for i in range(len(players_list)):
+            print(players_list[i], 'is answering:')
+        
+            game_question(category_answers)
+
+game()
 
 
 
-how_many_players = number_of_players()
-list_of_playing_people = nick(how_many_players)
-print_players(list_of_playing_people)
-game(read_file())
 
 
-current_game_table = create_table()
-change_table(current_game_table, table_position)
-table_position = game(read_file())
+
+
+#current_game_table = create_table()
+#change_table(current_game_table, table_position)
+#table_position = game(read_file())
