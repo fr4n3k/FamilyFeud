@@ -135,6 +135,7 @@ def game():
     
     rounds= number_of_rounds()
     
+    
     how_many_players = number_of_players()
     list_of_playing_people = nick(how_many_players)
     print_players(list_of_playing_people)
