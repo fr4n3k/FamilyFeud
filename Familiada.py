@@ -14,12 +14,14 @@ def number_of_players():#zwraca nam TYLKO 1 liczbe<!!!!!
             continue
     return no_of_players
 
+
 def nick(players):#zwraca nam graczy
     nickname=[]
     for i in range(players):
         name=input("Enter a nickname: ")
         nickname.append(name)
     return nickname
+
 
 def print_players(list_of_players):
     
@@ -36,6 +38,7 @@ def number_of_rounds():
             return rounds
         else:
             continue
+
 
 def read_file():
     
@@ -59,6 +62,7 @@ def read_file():
     category_name = current_category.rstrip('.txt')
     return [category_name, current_game_answers]
 
+
 def create_table() -> list:
     ''' create_table prints an empty table of 10 answers and returns it'''
 
@@ -66,8 +70,8 @@ def create_table() -> list:
     answers_table =[]
     for i in range(10):
         answers_table.append(row.copy())
-    for index, row in enumerate(answers_table):
-        print(index+1, "  ".join(row))    
+    # for index, row in enumerate(answers_table):
+    #     print(index+1, "  ".join(row))    
     return answers_table
 
 
@@ -85,7 +89,6 @@ def game_question(category_and_answers) -> list:
     return list_answer_score
     
 
-
 def change_table(game_table, answer_score):
     
     which_element=10-int(answer_score[1])
@@ -99,17 +102,32 @@ def change_table(game_table, answer_score):
 
     return game_table
 
+
 def mix_players(players_list):
     temp_players=list(players_list)
     random.shuffle(temp_players)
     print("List of players: ",  temp_players)
     return temp_players
 
+
 def players_and_points(players_list):
     dict_player_point = {}
     for player in players_list:
         dict_player_point[player] = 0
     return dict_player_point
+
+
+def score_table(players_score: dict):
+
+    width=17
+    print("-"* width)
+    print("| nickname | points |")
+    list_score = []
+    for player, score in players_score.items():
+        list_score.append((player, score))
+    for item in list_score:
+        print (item[0], item[1])     
+    print("-"* width)
 
 
 def game():
@@ -121,7 +139,7 @@ def game():
     list_of_playing_people = nick(how_many_players)
     print_players(list_of_playing_people)
     points = players_and_points(list_of_playing_people)
-    print(points)
+    
 
     for round in range(rounds):
         print('====================')
@@ -138,26 +156,14 @@ def game():
             change_table(current_game_table, players_answer)
             points[player] += int(players_answer[1])
             print(f"Player {player} has {points[player]} points")
+        
+        score_table(points)
 
     winner = max(points.values())
     for player in points.keys():
         if points[player] == winner:
             print(f"{player} has won!")
+
+
 game()
 
-
-
-def score_table():
-
-    szer=17
-    print("-"* szer)
-    print("| nick | punkty |")
-    print("-"* szer)
-
-
-
-
-
-#current_game_table = create_table()
-#change_table(current_game_table, table_position)
-#table_position = game(read_file())
