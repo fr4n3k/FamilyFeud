@@ -139,6 +139,10 @@ def game():
             points[player] += int(players_answer[1])
             print(f"Player {player} has {points[player]} points")
 
+    winner = max(points.values())
+    for player in points.keys():
+        if points[player] == winner:
+            print(f"{player} has won!")
 game()
 
 
