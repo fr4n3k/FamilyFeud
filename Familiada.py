@@ -122,10 +122,12 @@ def score_table(players_score: dict):
     width=17
     print("-"* width)
     print("| nickname | points |")
+    print("-"* width)
     list_score = []
     for player, score in players_score.items():
         list_score.append((player, score))
     for item in list_score:
+        print("-"* width)
         print ("|",item[0], "|",item[1])     
     print("-"* width)
 
