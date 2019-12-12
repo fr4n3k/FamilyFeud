@@ -43,8 +43,8 @@ def read_file():
     categories = [file for file in listdir(file_directory+'/Categories/') 
                 if isfile(join(file_directory+'/Categories/', file))]
     lista =[]
-    current_categorie = random.choice(categories)
-    text = open(join(file_directory+'/Categories/', current_categorie)).read()
+    current_category = random.choice(categories)
+    text = open(join(file_directory+'/Categories/', current_category)).read()
     lines = text.split('\n')
     for line in lines:
         lista.append(line)
@@ -56,8 +56,8 @@ def read_file():
     current_game_answers = {}
     for i in range (0, len(lista_question_answer)):
         current_game_answers[lista_question_answer[i][0]]= lista_question_answer[i][1]
-    categorie_name = current_categorie.rstrip('.txt')
-    return [categorie_name, current_game_answers]
+    category_name = current_category.rstrip('.txt')
+    return [category_name, current_game_answers]
 
 def create_table() -> list:
     ''' create_table prints an empty table of 10 answers and returns it'''
@@ -76,8 +76,8 @@ def game_question(category_and_answers) -> list:
     print (category_and_answers[0])
     answer=input("Your answer is: " )
     if answer in category_and_answers[1].keys():
-        print(category_and_answers[1], category_and_answers[1][answer])
-        list_answer_score =[category_and_answers[1], category_and_answers[1][answer]]
+        # print(category_and_answers[1], category_and_answers[1][answer])
+        list_answer_score =[answer, category_and_answers[1][answer]]
         
     else:
         list_answer_score=["Wrong answer", 0]
@@ -89,13 +89,14 @@ def game_question(category_and_answers) -> list:
 def change_table(game_table, answer_score):
     
     which_element=10-int(answer_score[1])
+
     if which_element in range(0, 10):
         game_table[which_element]=answer_score
-        print()
         for index, row in enumerate(game_table):
             print(index+1, "  ".join(row))
     else:
         print("wrong answer")        
+
     return game_table
 
 def mix_players(players_list):
@@ -115,15 +116,19 @@ def game():
     how_many_players = number_of_players()
     list_of_playing_people = nick(how_many_players)
     print_players(list_of_playing_people)
-    for round in range (rounds):
-        print('round',rounds )
+    for round in range(rounds):
+        print('====================')
+        print('round',round + 1)
         category_answers = read_file()
+        current_game_table = create_table()
         players_list=mix_players(list_of_playing_people)
 
         for i in range(len(players_list)):
+            print('--------------------')
             print(players_list[i], 'is answering:')
         
-            game_question(category_answers)
+            players_answer = game_question(category_answers)
+            change_table(current_game_table, players_answer)
 
 game()
 
