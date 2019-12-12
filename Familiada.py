@@ -126,7 +126,7 @@ def score_table(players_score: dict):
     for player, score in players_score.items():
         list_score.append((player, score))
     for item in list_score:
-        print (item[0], item[1])     
+        print ("|",item[0], "|",item[1])     
     print("-"* width)
 
 
