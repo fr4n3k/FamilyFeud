@@ -147,6 +147,13 @@ game()
 
 
 
+def score_table():
+
+    szer=17
+    print("-"* szer)
+    print("| nick | punkty |")
+    print("-"* szer)
+
 
 
 
