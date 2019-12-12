@@ -105,17 +105,24 @@ def mix_players(players_list):
     print("List of players: ",  temp_players)
     return temp_players
 
+def players_and_points(players_list):
+    dict_player_point = {}
+    for player in players_list:
+        dict_player_point[player] = 0
+    return dict_player_point
+
+
 def game():
 
-    # this function returns category question and table of answers
-    
-    
     
     rounds= number_of_rounds()
     
     how_many_players = number_of_players()
     list_of_playing_people = nick(how_many_players)
     print_players(list_of_playing_people)
+    points = players_and_points(list_of_playing_people)
+    print(points)
+
     for round in range(rounds):
         print('====================')
         print('round',round + 1)
@@ -123,12 +130,14 @@ def game():
         current_game_table = create_table()
         players_list=mix_players(list_of_playing_people)
 
-        for i in range(len(players_list)):
+        for player in players_list:
             print('--------------------')
-            print(players_list[i], 'is answering:')
+            print(player, 'is answering:')
         
             players_answer = game_question(category_answers)
             change_table(current_game_table, players_answer)
+            points[player] += int(players_answer[1])
+            print(f"Player {player} has {points[player]} points")
 
 game()
 
