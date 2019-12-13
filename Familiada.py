@@ -99,6 +99,7 @@ def change_table(game_table, answer_score):
             print(index+1, "  ".join(row))
     else:
         print("wrong answer")
+        print("X   X\n X X \n  X  \n X X \nX   X")
         #print("X","","","X")
         #print("","","X","")
         #print("X","","","X")        
@@ -122,10 +123,10 @@ def players_and_points(players_list):
 
 def score_table(players_score: dict):
 
-    width=17
-    print("-"* width)
+    width=21
+    print("="* width)
     print("| nickname | points |")
-    print("-"* width)
+    #print("-"* width)
     list_score = []
     for player, score in players_score.items():
         list_score.append((player, score))
