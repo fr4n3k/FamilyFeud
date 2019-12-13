@@ -98,7 +98,10 @@ def change_table(game_table, answer_score):
         for index, row in enumerate(game_table):
             print(index+1, "  ".join(row))
     else:
-        print("wrong answer")        
+        print("wrong answer")
+        #print("X","","","X")
+        #print("","","X","")
+        #print("X","","","X")        
 
     return game_table
 
